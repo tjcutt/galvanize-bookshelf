@@ -5,7 +5,7 @@ const knex = require('../knex');
 const humps = require('humps');
 const router = express.Router();
 
-router.get('/books', (req, res, next) => {
+router.get('/', (req, res, next) => {
   knex('books')
     .orderBy('title')
     .then(books => {
@@ -13,7 +13,7 @@ router.get('/books', (req, res, next) => {
     });
   });
 
-router.get('/books/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   knex('books')
     .where('id', req.params.id)
     .then(books => {
@@ -21,7 +21,7 @@ router.get('/books/:id', (req, res, next) => {
     });
 });
 
-router.post('/books', (req, res, next) => {
+router.post('/', (req, res, next) => {
   knex('books')
     .returning(['id', 'title', 'author', 'genre', 'description', 'cover_url'])
     .insert({
@@ -36,7 +36,7 @@ router.post('/books', (req, res, next) => {
     })
 })
 
-router.patch('/books/:id', (req, res, next) => {
+router.patch('/:id', (req, res, next) => {
   let id = req.params.id
   knex('books')
      .where('id', id)
@@ -62,7 +62,7 @@ router.patch('/books/:id', (req, res, next) => {
 //   res.render('error')
 // });
 
-router.delete('/books/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   knex('books')
     .returning(['title', 'author', 'genre', 'description', 'cover_url'])
     .where('id', req.params.id)

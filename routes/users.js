@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt-as-promised');
 const knex = require('../knex');
 const humps = require('humps');
 
-router.post('/users', (req, res, next) => {
+router.post('/', (req, res, next) => {
   bcrypt.hash(req.body.password, 12)
     .then((hashed_password) => {
       return knex('users')
