@@ -24,7 +24,8 @@ router.get('/books/:id', (req, res, next) => {
 router.post('/books', (req, res, next) => {
   knex('books')
     .returning(['id', 'title', 'author', 'genre', 'description', 'cover_url'])
-    .insert({title: req.body.title,
+    .insert({
+      title: req.body.title,
       author: req.body.author,
       genre: req.body.genre,
       description: req.body.description,
@@ -32,7 +33,7 @@ router.post('/books', (req, res, next) => {
     })
     .then(book => {
       res.send(humps.camelizeKeys(book[0]));
-    });
+    })
 })
 
 router.patch('/books/:id', (req, res, next) => {
@@ -40,7 +41,8 @@ router.patch('/books/:id', (req, res, next) => {
   knex('books')
      .where('id', id)
      .returning(['id', 'title', 'author', 'genre', 'description', 'cover_url'])
-     .update({title: req.body.title,
+     .update({
+       title: req.body.title,
        author: req.body.author,
        genre: req.body.genre,
        description: req.body.description,
@@ -48,8 +50,17 @@ router.patch('/books/:id', (req, res, next) => {
      })
     .then(book => {
       res.send(humps.camelizeKeys(book[0]));
-   });
+   })
+  // next()
+
+  //  .catch(() => {
+  //  res.sendStatus(404)
+  //  });
 });
+
+// router.get('/books/:id', (req, res, next) => {
+//   res.render('error')
+// });
 
 router.delete('/books/:id', (req, res, next) => {
   knex('books')
@@ -61,13 +72,13 @@ router.delete('/books/:id', (req, res, next) => {
     });
 });
 
-//=================== BONUS
+// =================== BONUS
 
 // router.get('/books/:id', (req, res, next) => {
 //   knex('books')
 //      .whereNot('id', req.params.id)
 //      .then(()=>{
-//        res.redirect('../public/error')
+//        res.status('404')
 //      });
 // })
 
