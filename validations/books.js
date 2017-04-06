@@ -1,5 +1,6 @@
 'use strict';
 
+<<<<<<< HEAD
 module.exports.post = {
     body: {
         title: Joi.string
@@ -30,6 +31,31 @@ module.exports.post = {
             .label(cover_url)
             .required()
             .string()
+=======
+const Joi = require('joi');
+
+module.exports.patch = {
+    body: {
+        title: Joi.string()
+            .label('title')
+            .required()
+            .trim(),
+        author: Joi.string()
+            .label('author')
+            .required()
+            .trim(),
+        genre: Joi.string()
+            .label('genre')
+            .required()
+            .trim(),
+        description: Joi.string()
+            .label('description')
+            .required()
+            .trim(),
+        coverUrl: Joi.string()
+            .label('cover_url')
+            .required()
+>>>>>>> validations
             .trim()
     }
 };
