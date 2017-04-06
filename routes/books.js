@@ -4,6 +4,7 @@ const express = require('express');
 const knex = require('../knex');
 const humps = require('humps');
 const router = express.Router();
+const boom = require('boom');
 
 router.get('/', (req, res, next) => {
   knex('books')
@@ -74,7 +75,14 @@ router.delete('/:id', (req, res, next) => {
 
 // =================== BONUS
 
-// router.get('/books/:id', (req, res, next) => {
+// router.get('/:id', (req, res, next) => {
+    //let id = req.params.id;
+    //if (typeof id === 'string'){
+  //   next(boom.create(404, 'Not Found'))
+  // }
+
+  //if(!id){}
+
 //   knex('books')
 //      .whereNot('id', req.params.id)
 //      .then(()=>{
