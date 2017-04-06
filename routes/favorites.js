@@ -41,7 +41,7 @@ router.post('/', (req, res, next) => {
     if (!req.cookies.token) {
         return next(boom.create(401, 'Unauthorized'));
     } else
-    // {
+    // Bonus {
     //     let bookId = req.body.bookId
     //     if (typeof bookId !== 'number') {
     //         next(boom.create(400, 'Please enter a valid number'))
@@ -65,7 +65,8 @@ router.delete('/', (req, res, next) => {
     if (!req.cookies.token) {
         return next(boom.create(401, 'Unauthorized'))
     }
-    // let bookId = req.body.bookId
+    // Bonus
+    //let bookId = req.body.bookId
     // if (bookId !== 'number') {
     //     next(boom.create(400, 'Please enter a valid number'))
     // }
