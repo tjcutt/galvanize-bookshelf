@@ -40,14 +40,17 @@ router.get('/check', (req, res, next) => {
 router.post('/', (req, res, next) => {
     if (!req.cookies.token) {
         return next(boom.create(401, 'Unauthorized'));
-    } else {
-        let bookId = req.body.bookId
-        if (typeof bookId !== 'number') {
-            next(boom.create(400, 'Please enter a valid number'))
-        } else {
+    } else
+    // {
+    //     let bookId = req.body.bookId
+    //     if (typeof bookId !== 'number') {
+    //         next(boom.create(400, 'Please enter a valid number'))
+    //     }
+        // else
+         {
             knex('favorites')
                 .insert({
-                    book_id: bookID,
+                    book_id: req.body.bookId,
                     user_id: 1
                 })
                 .returning('*')
@@ -55,24 +58,26 @@ router.post('/', (req, res, next) => {
                     res.send(humps.camelizeKeys(book[0]));
                 });
         }
-    }
+    // }
 })
 
 router.delete('/', (req, res, next) => {
     if (!req.cookies.token) {
         return next(boom.create(401, 'Unauthorized'))
     }
-    let bookId = req.body.bookId
-    if (bookId !== 'number') {
-        next(boom.create(400, 'Please enter a valid number'))
-    } else {
+    // let bookId = req.body.bookId
+    // if (bookId !== 'number') {
+    //     next(boom.create(400, 'Please enter a valid number'))
+    // }
+    // else
+    {
         knex('favorites')
             .returning('*')
-            .where('bookId', bookId)
+            .where('book_id', req.body.bookId)
             .del()
             .then((ret) => {
                 delete ret[0].id;
-                res.send(humps.camelizeKeys(ret[0]))
+                res.json(humps.camelizeKeys(ret[0]))
             })
     }
 
